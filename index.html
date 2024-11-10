@@ -3,46 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Survey Form</title>
-    <link rel="stylesheet" href="styles.css" />
+    <title>Interactive Survey Form</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="gradient-bg">
+        <svg xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <filter id="goo">
+                    <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+                    <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -8" result="goo" />
+                    <feBlend in="SourceGraphic" in2="goo" />
+                </filter>
+            </defs>
+        </svg>
         <div class="gradients-container">
             <div class="g1"></div>
             <div class="g2"></div>
             <div class="g3"></div>
             <div class="g4"></div>
             <div class="g5"></div>
+            <div class="interactive"></div>
         </div>
     </div>
 
     <main>
-        <form>
+        <h1 class="form-title">Transport Survey</h1>
+        <form id="surveyForm">
             <fieldset class="survey-question">
                 <legend>What's your preferred mode of transportation?</legend>
                 <div class="make-vertical">
-                    <label><input type="radio" name="transportation" value="car" required> Car </label>
-                    <label><input type="radio" name="transportation" value="bicycle" required> Bicycle </label>
-                    <label><input type="radio" name="transportation" value="bus" required> Bus </label>
-                    <label><input type="radio" name="transportation" value="train" required> Train </label>
+                    <label class="radio-container">
+                        <input type="radio" name="transportation" value="car" required>
+                        <span class="radio-label">Car</span>
+                    </label>
+                    <label class="radio-container">
+                        <input type="radio" name="transportation" value="bicycle" required>
+                        <span class="radio-label">Bicycle</span>
+                    </label>
+                    <label class="radio-container">
+                        <input type="radio" name="transportation" value="bus" required>
+                        <span class="radio-label">Bus</span>
+                    </label>
+                    <label class="radio-container">
+                        <input type="radio" name="transportation" value="train" required>
+                        <span class="radio-label">Train</span>
+                    </label>
                 </div>
             </fieldset>
+
             <fieldset class="survey-question">
                 <legend>How would you rate your experience?</legend>
                 <div class="make-horizontal">
-                    <label class="radio"><input type="radio" name="experience" value="1" required> 1 (Poor) </label>
-                    <label class="radio"><input type="radio" name="experience" value="2" required> 2 (Fair) </label>
-                    <label class="radio"><input type="radio" name="experience" value="3" required> 3 (Good) </label>
-                    <label class="radio"><input type="radio" name="experience" value="4" required> 4 (Very Good) </label>
-                    <label class="radio"><input type="radio" name="experience" value="5" required> 5 (Excellent) </label>
+                    <label class="radio-container">
+                        <input type="radio" name="experience" value="1" required>
+                        <span class="radio-label">1 (Poor)</span>
+                    </label>
+                    <label class="radio-container">
+                        <input type="radio" name="experience" value="2" required>
+                        <span class="radio-label">2 (Fair)</span>
+                    </label>
+                    <label class="radio-container">
+                        <input type="radio" name="experience" value="3" required>
+                        <span class="radio-label">3 (Good)</span>
+                    </label>
+                    <label class="radio-container">
+                        <input type="radio" name="experience" value="4" required>
+                        <span class="radio-label">4 (Very Good)</span>
+                    </label>
+                    <label class="radio-container">
+                        <input type="radio" name="experience" value="5" required>
+                        <span class="radio-label">5 (Excellent)</span>
+                    </label>
                 </div>
             </fieldset>
+
             <div class="button-center">
-                <button type="button" class="button-style" onclick=validateForm(event)>Submit</button>
+                <button type="submit" class="button-style">Submit Survey</button>
             </div>
         </form>
     </main>
-    <script src="index.js"></script>
+
+    <script src="script.js"></script>
 </body>
 </html>
