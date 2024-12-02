@@ -1,8 +1,6 @@
 :root {
-    /* Background Gradient */
     --color-bg: linear-gradient(40deg, rgb(108, 0, 162), rgb(0, 17, 82));
-    
-    /* Gradient Color Palette */
+
     --gradient-colors: {
         interactive: 140, 100, 255,
         blue: 18, 113, 255,
@@ -11,13 +9,11 @@
         red: 200, 50, 50,
         yellow: 180, 180, 50
     };
-    
-    /* Sizing and Layout */
+
     --circle-size: 80%;
     --blur-amount: 40px;
 }
 
-/* Base Background */
 .gradient-bg {
     position: fixed;
     inset: 0;
@@ -28,14 +24,12 @@
     overflow: hidden;
 }
 
-/* Gradient Container */
 .gradients-container {
     filter: url(#goo) blur(var(--blur-amount));
     width: 100%;
     height: 100%;
 }
 
-/* Shared Gradient Styles */
 .gradient-circle {
     position: absolute;
     width: var(--circle-size);
@@ -47,7 +41,6 @@
     left: calc(50% - var(--circle-size) / 2);
 }
 
-/* Individual Gradient Circles */
 .g1 {
     background: radial-gradient(
         circle, 
@@ -109,7 +102,6 @@
     opacity: 0.7;
 }
 
-/* Animations */
 @keyframes moveInCircle {
     to { 
         transform: rotate(360deg); 
