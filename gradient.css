@@ -1,121 +1,203 @@
+/* 
+ * Enhanced Gradient Background Animation
+ * - Improved variable organization
+ * - Better performance with will-change
+ * - Responsive sizing
+ * - Additional animation options
+ * - Better browser compatibility
+ */
+
 :root {
-    --color-bg: linear-gradient(40deg, rgb(108, 0, 162), rgb(0, 17, 82));
-
-    --gradient-colors: {
-        interactive: 140, 100, 255,
-        blue: 18, 113, 255,
-        purple: 221, 74, 255,
-        cyan: 100, 220, 255,
-        red: 200, 50, 50,
-        yellow: 180, 180, 50
-    };
-
-    --circle-size: 80%;
-    --blur-amount: 40px;
+  /* Core colors */
+  --color-bg: linear-gradient(40deg, rgb(108, 0, 162), rgb(0, 17, 82));
+  
+  /* Gradient circle colors - RGB format for easier opacity control */
+  --color-interactive: 140, 100, 255;
+  --color-blue: 18, 113, 255;
+  --color-purple: 221, 74, 255;
+  --color-cyan: 100, 220, 255;
+  --color-red: 200, 50, 50;
+  --color-yellow: 180, 180, 50;
+  --color-green: 50, 200, 100; /* Added new color */
+  
+  /* Animation settings */
+  --animation-speed-slow: 40s;
+  --animation-speed-medium: 30s;
+  --animation-speed-fast: 20s;
+  
+  /* Size and effect settings */
+  --circle-size: clamp(300px, 80%, 1000px); /* Responsive sizing with clamp */
+  --blur-amount: 40px;
+  --gradient-opacity: 0.8;
+  --gradient-fade: 50%; /* Where the gradient fades to transparent */
 }
 
+/* Main background container */
 .gradient-bg {
-    position: fixed;
-    inset: 0;
-    width: 100vw;
-    height: 100vh;
-    background: var(--color-bg);
-    z-index: -1;
-    overflow: hidden;
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background: var(--color-bg);
+  z-index: -1;
+  overflow: hidden;
 }
 
+/* Container for all gradient circles with filter effects */
 .gradients-container {
-    filter: url(#goo) blur(var(--blur-amount));
-    width: 100%;
-    height: 100%;
+  filter: url(#goo) blur(var(--blur-amount));
+  width: 100%;
+  height: 100%;
+  position: relative;
 }
 
+/* Base style for all gradient circles */
 .gradient-circle {
-    position: absolute;
-    width: var(--circle-size);
-    height: var(--circle-size);
-    mix-blend-mode: hard-light;
-    border-radius: 50%;
-    pointer-events: none;
-    top: calc(50% - var(--circle-size) / 2);
-    left: calc(50% - var(--circle-size) / 2);
+  position: absolute;
+  width: var(--circle-size);
+  height: var(--circle-size);
+  mix-blend-mode: hard-light;
+  border-radius: 50%;
+  pointer-events: none;
+  top: calc(50% - var(--circle-size) / 2);
+  left: calc(50% - var(--circle-size) / 2);
+  will-change: transform; /* Performance optimization */
+  transform-origin: center center;
 }
 
+/* Individual gradient circles with unique colors and animations */
 .g1 {
-    background: radial-gradient(
-        circle, 
-        rgba(var(--gradient-colors-blue), 0.8) 0, 
-        rgba(var(--gradient-colors-blue), 0) 50%
-    );
-    animation: moveVertical 30s ease infinite;
+  background: radial-gradient(
+    circle, 
+    rgba(var(--color-blue), var(--gradient-opacity)) 0, 
+    rgba(var(--color-blue), 0) var(--gradient-fade)
+  );
+  animation: moveVertical var(--animation-speed-medium) ease infinite;
 }
 
 .g2 {
-    background: radial-gradient(
-        circle, 
-        rgba(var(--gradient-colors-purple), 0.8) 0, 
-        rgba(var(--gradient-colors-purple), 0) 50%
-    );
-    animation: moveInCircle 20s reverse infinite;
+  background: radial-gradient(
+    circle, 
+    rgba(var(--color-purple), var(--gradient-opacity)) 0, 
+    rgba(var(--color-purple), 0) var(--gradient-fade)
+  );
+  animation: moveInCircle var(--animation-speed-fast) reverse infinite;
 }
 
 .g3 {
-    background: radial-gradient(
-        circle, 
-        rgba(var(--gradient-colors-cyan), 0.8) 0, 
-        rgba(var(--gradient-colors-cyan), 0) 50%
-    );
-    transform: translate(-500px, 200px);
-    animation: moveInCircle 40s linear infinite;
+  background: radial-gradient(
+    circle, 
+    rgba(var(--color-cyan), var(--gradient-opacity)) 0, 
+    rgba(var(--color-cyan), 0) var(--gradient-fade)
+  );
+  transform: translate(-25%, 20%);
+  animation: moveInCircle var(--animation-speed-slow) linear infinite;
 }
 
 .g4 {
-    background: radial-gradient(
-        circle, 
-        rgba(var(--gradient-colors-red), 0.8) 0, 
-        rgba(var(--gradient-colors-red), 0) 50%
-    );
-    animation: moveHorizontal 40s ease infinite;
+  background: radial-gradient(
+    circle, 
+    rgba(var(--color-red), var(--gradient-opacity)) 0, 
+    rgba(var(--color-red), 0) var(--gradient-fade)
+  );
+  animation: moveHorizontal var(--animation-speed-slow) ease infinite;
 }
 
 .g5 {
-    background: radial-gradient(
-        circle, 
-        rgba(var(--gradient-colors-yellow), 0.8) 0, 
-        rgba(var(--gradient-colors-yellow), 0) 50%
-    );
-    width: calc(var(--circle-size) * 2);
-    height: calc(var(--circle-size) * 2);
-    animation: moveInCircle 20s ease infinite;
+  background: radial-gradient(
+    circle, 
+    rgba(var(--color-yellow), var(--gradient-opacity)) 0, 
+    rgba(var(--color-yellow), 0) var(--gradient-fade)
+  );
+  width: calc(var(--circle-size) * 1.5);
+  height: calc(var(--circle-size) * 1.5);
+  animation: moveInCircle var(--animation-speed-fast) ease infinite;
 }
 
+/* New gradient circles */
+.g6 {
+  background: radial-gradient(
+    circle, 
+    rgba(var(--color-green), var(--gradient-opacity)) 0, 
+    rgba(var(--color-green), 0) var(--gradient-fade)
+  );
+  width: calc(var(--circle-size) * 0.8);
+  height: calc(var(--circle-size) * 0.8);
+  animation: moveDiagonal var(--animation-speed-medium) ease-in-out infinite;
+}
+
+/* Interactive gradient that follows cursor */
 .interactive {
-    background: radial-gradient(
-        circle, 
-        rgba(var(--gradient-colors-interactive), 0.8) 0, 
-        rgba(var(--gradient-colors-interactive), 0) 50%
-    );
-    width: 100%;
-    height: 100%;
-    top: -50%;
-    left: -50%;
-    opacity: 0.7;
+  background: radial-gradient(
+    circle, 
+    rgba(var(--color-interactive), var(--gradient-opacity)) 0, 
+    rgba(var(--color-interactive), 0) var(--gradient-fade)
+  );
+  width: 100%;
+  height: 100%;
+  top: -50%;
+  left: -50%;
+  opacity: 0.7;
+  transition: transform 0.2s ease-out;
 }
 
+/* Animation keyframes */
 @keyframes moveInCircle {
-    to { 
-        transform: rotate(360deg); 
-    }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% { 
+    transform: rotate(360deg); 
+  }
 }
 
 @keyframes moveVertical {
-    50% { 
-        transform: translateY(50%); 
-    }
+  0% {
+    transform: translateY(0);
+  }
+  50% { 
+    transform: translateY(30%); 
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
 
 @keyframes moveHorizontal {
-    50% { 
-        transform: translate(50%, 10%); 
-    }
+  0% {
+    transform: translate(0, 0);
+  }
+  50% { 
+    transform: translate(30%, 10%); 
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes moveDiagonal {
+  0% {
+    transform: translate(-20%, -20%);
+  }
+  50% {
+    transform: translate(20%, 20%);
+  }
+  100% {
+    transform: translate(-20%, -20%);
+  }
+}
+
+/* Media queries for responsive adjustments */
+@media (max-width: 768px) {
+  :root {
+    --circle-size: clamp(200px, 90%, 600px);
+    --blur-amount: 30px;
+  }
+}
+
+/* Reduced motion preference support */
+@media (prefers-reduced-motion) {
+  .gradient-circle {
+    animation-duration: 60s !important;
+  }
 }
